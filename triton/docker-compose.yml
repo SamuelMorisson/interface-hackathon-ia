@@ -1,0 +1,17 @@
+services:
+  triton:
+    build:
+      context: ..
+      dockerfile: tritton_server/Dockerfile
+    container_name: techcorp-triton
+    ports:
+      - "8000:8000"
+      - "8001:8001"
+      - "8002:8002"
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+    gpus:
+      - count: all
+        capabilities: [gpu]
+    shm_size: 2gb
+    restart: unless-stopped
