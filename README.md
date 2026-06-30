@@ -2,6 +2,20 @@
 
 Interface web de chat connectée au modèle **Phi-3.5-Financial** via Ollama.
 
+## Choix technique — Ollama vs Triton
+
+Dans le cadre de ce projet, nous avions le choix entre trois solutions pour servir le modèle Phi-3.5-Financial : **Ollama**, **Triton Inference Server** ou un serveur maison (FastAPI, vLLM…).
+
+Nous avons retenu **Ollama** comme serveur principal pour les raisons suivantes :
+
+- **Mise en place immédiate** : une seule commande suffit à télécharger et lancer le modèle, sans configuration Docker ni dépendances NVIDIA complexes
+- **API REST native** : Ollama expose directement une API compatible avec notre stack Node.js + React, sans couche d'adaptation
+- **Streaming intégré** : les réponses arrivent token par token sans configuration supplémentaire, ce qui améliore l'expérience utilisateur
+- **Modèle personnalisé simplifié** : le système de `Modelfile` permet de surcharger le system prompt et les paramètres d'inférence en quelques lignes
+- **Légèreté** : fonctionne en CPU ou GPU sans prérequis matériels stricts, contrairement à Triton qui nécessite un GPU NVIDIA et une stack Docker lourde
+
+Triton Inference Server reste disponible dans le dossier `triton/` pour un déploiement avancé en production avec GPU dédié. L'interface supporte les deux backends via le sélecteur intégré.
+
 ## Stack technique
 
 - **Frontend** : React 18 + Vite
