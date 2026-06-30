@@ -1,0 +1,15 @@
+{
+  "name": "techcorp-ai-chat",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "concurrently \"node server.js\" \"cd client && npm run dev\"",
+    "build": "cd client && npm run build",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
